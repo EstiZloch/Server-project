@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SimplyTravelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="int" Nullable="false" />
+    <Property Name="passwordCustomer" Type="varchar" MaxLength="6" />
+    <Property Name="checkPassword" Type="varchar" MaxLength="6" />
+    <Property Name="email" Type="varchar(max)" />
+    <Property Name="nameCustomer" Type="varchar(max)" />
+    <Property Name="extraLevel" Type="int" />
+    <Property Name="free_notFree" Type="bit" />
+    <Property Name="sumToPay" Type="int" />
+    <Property Name="minAge" Type="int" />
+    <Property Name="maxAge" Type="int" />
+    <Property Name="car_bus" Type="bit" />
+    <Property Name="statusCustomer" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Regions">
+    <Key>
+      <PropertyRef Name="codeRegion" />
+    </Key>
+    <Property Name="codeRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameRegion" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Remainders">
+    <Key>
+      <PropertyRef Name="codeRemainder" />
+    </Key>
+    <Property Name="codeRemainder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="describe" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Responses">
+    <Key>
+      <PropertyRef Name="codeResponse" />
+    </Key>
+    <Property Name="codeResponse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codeSiteInTrip" Type="int" />
+    <Property Name="question1" Type="int" />
+    <Property Name="question2" Type="int" />
+    <Property Name="question3" Type="int" />
+    <Property Name="question4" Type="int" />
+    <Property Name="question5" Type="int" />
+    <Property Name="notes" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Sites">
+    <Key>
+      <PropertyRef Name="codeSite" />
+    </Key>
+    <Property Name="codeSite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codeSiteKind" Type="int" />
+    <Property Name="nameSite" Type="varchar(max)" />
+    <Property Name="adress" Type="varchar(max)" />
+    <Property Name="codeSub_Region" Type="int" />
+    <Property Name="extraLevel" Type="int" />
+    <Property Name="minAge" Type="int" />
+    <Property Name="maxAge" Type="int" />
+    <Property Name="misLiterWater" Type="int" />
+    <Property Name="free_notFree" Type="bit" />
+    <Property Name="sumToPay" Type="int" />
+    <Property Name="car_bus" Type="bit" />
+    <Property Name="coordination" Type="varchar(max)" />
+    <Property Name="timeSpend" Type="float" />
+    <Property Name="statusSite" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SitesInTrip">
+    <Key>
+      <PropertyRef Name="codeSiteInTrip" />
+    </Key>
+    <Property Name="codeSiteInTrip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codeTrip" Type="int" />
+    <Property Name="codeSite" Type="int" />
+  </EntityType>
+  <EntityType Name="SitesKind">
+    <Key>
+      <PropertyRef Name="codeSiteKind" />
+    </Key>
+    <Property Name="codeSiteKind" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameSiteKind" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="codeTrip" />
+    </Key>
+    <Property Name="codeTrip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="dateTrip" Type="date" />
+    <Property Name="nameTrip" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK__Remainder__idCus__17F790F9">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Remainders" Type="Self.Remainders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="Remainders">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Responses__codeS__25518C17">
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="0..1" />
+    <End Role="Responses" Type="Self.Responses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SitesInTrip">
+        <PropertyRef Name="codeSiteInTrip" />
+      </Principal>
+      <Dependent Role="Responses">
+        <PropertyRef Name="codeSiteInTrip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sites__codeSiteK__09A971A2">
+    <End Role="SitesKind" Type="Self.SitesKind" Multiplicity="0..1" />
+    <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SitesKind">
+        <PropertyRef Name="codeSiteKind" />
+      </Principal>
+      <Dependent Role="Sites">
+        <PropertyRef Name="codeSiteKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SitesInTr__codeS__22751F6C">
+    <End Role="Sites" Type="Self.Sites" Multiplicity="0..1" />
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sites">
+        <PropertyRef Name="codeSite" />
+      </Principal>
+      <Dependent Role="SitesInTrip">
+        <PropertyRef Name="codeSite" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SitesInTr__codeT__2180FB33">
+    <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="codeTrip" />
+      </Principal>
+      <Dependent Role="SitesInTrip">
+        <PropertyRef Name="codeTrip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Trips__idCustome__1AD3FDA4">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="Trips">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SimplyTravelModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Remainders" EntityType="Self.Remainders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Responses" EntityType="Self.Responses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SitesInTrip" EntityType="Self.SitesInTrip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SitesKind" EntityType="Self.SitesKind" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Remainder__idCus__17F790F9" Association="Self.FK__Remainder__idCus__17F790F9">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Remainders" EntitySet="Remainders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Responses__codeS__25518C17" Association="Self.FK__Responses__codeS__25518C17">
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+      <End Role="Responses" EntitySet="Responses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sites__codeSiteK__09A971A2" Association="Self.FK__Sites__codeSiteK__09A971A2">
+      <End Role="SitesKind" EntitySet="SitesKind" />
+      <End Role="Sites" EntitySet="Sites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SitesInTr__codeS__22751F6C" Association="Self.FK__SitesInTr__codeS__22751F6C">
+      <End Role="Sites" EntitySet="Sites" />
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SitesInTr__codeT__2180FB33" Association="Self.FK__SitesInTr__codeT__2180FB33">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Trips__idCustome__1AD3FDA4" Association="Self.FK__Trips__idCustome__1AD3FDA4">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SimplyTravelModelStoreContainer" CdmEntityContainer="SimplyTravelEntitiesNew">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Customers">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="passwordCustomer" ColumnName="passwordCustomer" />
+          <ScalarProperty Name="checkPassword" ColumnName="checkPassword" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nameCustomer" ColumnName="nameCustomer" />
+          <ScalarProperty Name="extraLevel" ColumnName="extraLevel" />
+          <ScalarProperty Name="free_notFree" ColumnName="free_notFree" />
+          <ScalarProperty Name="sumToPay" ColumnName="sumToPay" />
+          <ScalarProperty Name="minAge" ColumnName="minAge" />
+          <ScalarProperty Name="maxAge" ColumnName="maxAge" />
+          <ScalarProperty Name="car_bus" ColumnName="car_bus" />
+          <ScalarProperty Name="statusCustomer" ColumnName="statusCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Regions">
+        <MappingFragment StoreEntitySet="Regions">
+          <ScalarProperty Name="codeRegion" ColumnName="codeRegion" />
+          <ScalarProperty Name="nameRegion" ColumnName="nameRegion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Remainders">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Remainders">
+        <MappingFragment StoreEntitySet="Remainders">
+          <ScalarProperty Name="codeRemainder" ColumnName="codeRemainder" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="describe" ColumnName="describe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responses">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Responses">
+        <MappingFragment StoreEntitySet="Responses">
+          <ScalarProperty Name="codeResponse" ColumnName="codeResponse" />
+          <ScalarProperty Name="codeSiteInTrip" ColumnName="codeSiteInTrip" />
+          <ScalarProperty Name="question1" ColumnName="question1" />
+          <ScalarProperty Name="question2" ColumnName="question2" />
+          <ScalarProperty Name="question3" ColumnName="question3" />
+          <ScalarProperty Name="question4" ColumnName="question4" />
+          <ScalarProperty Name="question5" ColumnName="question5" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sites">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Sites">
+        <MappingFragment StoreEntitySet="Sites">
+          <ScalarProperty Name="codeSite" ColumnName="codeSite" />
+          <ScalarProperty Name="codeSiteKind" ColumnName="codeSiteKind" />
+          <ScalarProperty Name="nameSite" ColumnName="nameSite" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="codeSub_Region" ColumnName="codeSub_Region" />
+          <ScalarProperty Name="extraLevel" ColumnName="extraLevel" />
+          <ScalarProperty Name="minAge" ColumnName="minAge" />
+          <ScalarProperty Name="maxAge" ColumnName="maxAge" />
+          <ScalarProperty Name="misLiterWater" ColumnName="misLiterWater" />
+          <ScalarProperty Name="free_notFree" ColumnName="free_notFree" />
+          <ScalarProperty Name="sumToPay" ColumnName="sumToPay" />
+          <ScalarProperty Name="car_bus" ColumnName="car_bus" />
+          <ScalarProperty Name="coordination" ColumnName="coordination" />
+          <ScalarProperty Name="timeSpend" ColumnName="timeSpend" />
+          <ScalarProperty Name="statusSite" ColumnName="statusSite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SitesInTrip">
+      <EntityTypeMapping TypeName="SimplyTravelModel.SitesInTrip">
+        <MappingFragment StoreEntitySet="SitesInTrip">
+          <ScalarProperty Name="codeSiteInTrip" ColumnName="codeSiteInTrip" />
+          <ScalarProperty Name="codeTrip" ColumnName="codeTrip" />
+          <ScalarProperty Name="codeSite" ColumnName="codeSite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SitesKind">
+      <EntityTypeMapping TypeName="SimplyTravelModel.SitesKind">
+        <MappingFragment StoreEntitySet="SitesKind">
+          <ScalarProperty Name="codeSiteKind" ColumnName="codeSiteKind" />
+          <ScalarProperty Name="nameSiteKind" ColumnName="nameSiteKind" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sub_Regions">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Sub_Regions">
+        <MappingFragment StoreEntitySet="Sub_Regions">
+          <ScalarProperty Name="codeSub_Region" ColumnName="codeSub_Region" />
+          <ScalarProperty Name="codeRegion" ColumnName="codeRegion" />
+          <ScalarProperty Name="nameSub_Region" ColumnName="nameSub_Region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="SimplyTravelModel.Trips">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="codeTrip" ColumnName="codeTrip" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="dateTrip" ColumnName="dateTrip" />
+          <ScalarProperty Name="nameTrip" ColumnName="nameTrip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

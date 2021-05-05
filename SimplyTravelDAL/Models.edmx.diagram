@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3b97595cd850464aa35b4e68f524c8c5" Name="Diagram1">
+        <EntityTypeShape EntityType="SimplyTravelModel.Customers" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Regions" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Remainders" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Responses" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Sites" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.SitesInTrip" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.SitesKind" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Sub_Regions" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Trips" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Remainder__idCus__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Trips__idCustome__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Sub_Regio__codeR__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Responses__codeS__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Sites__codeSiteK__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__Sites__codeSub_R__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__SitesInTr__codeS__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="SimplyTravelModel.FK__SitesInTr__codeT__2180FB33" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

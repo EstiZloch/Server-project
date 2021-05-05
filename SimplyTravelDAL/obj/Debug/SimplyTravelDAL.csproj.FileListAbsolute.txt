@@ -1,0 +1,45 @@
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csprojAssemblyReference.cache
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CoreCompileInputs.cache
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.pdb
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\Entities.dll
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\Entities.pdb
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CopyComplete
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.dll
+F:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.pdb
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.pdb
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\Entities.dll
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\bin\Debug\Entities.pdb
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csprojAssemblyReference.cache
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CoreCompileInputs.cache
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CopyComplete
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.dll
+E:\אסתי\אסתי שיעורים\פרויקט\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.pdb
+C:\development\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csprojAssemblyReference.cache
+C:\development\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CoreCompileInputs.cache
+C:\development\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.dll
+C:\development\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.pdb
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll.config
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.pdb
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.dll
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.xml
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\development\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CopyComplete
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll.config
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.dll
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\SimplyTravelDAL.pdb
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.dll
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.xml
+F:\SimplyTravel\SimplyTravelDAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csprojAssemblyReference.cache
+F:\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CoreCompileInputs.cache
+F:\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CopyComplete
+F:\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.dll
+F:\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.pdb
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\Models.dll
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\Models.pdb
+C:\development\SimplyTravel\SimplyTravelDAL\bin\Debug\Models.dll.config

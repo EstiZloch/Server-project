@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SimplyTravelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="passwordCustomer" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="checkPassword" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameCustomer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="extraLevel" Type="Int32" />
+    <Property Name="free_notFree" Type="Boolean" />
+    <Property Name="sumToPay" Type="Int32" />
+    <Property Name="minAge" Type="Int32" />
+    <Property Name="maxAge" Type="Int32" />
+    <Property Name="car_bus" Type="Boolean" />
+    <Property Name="statusCustomer" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Remainders" Relationship="Self.FK__Remainder__idCus__6B24EA82" FromRole="Customers" ToRole="Remainders" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__idCustome__6E01572D" FromRole="Customers" ToRole="Trips" />
+  </EntityType>
+  <EntityType Name="Regions">
+    <Key>
+      <PropertyRef Name="codeRegion" />
+    </Key>
+    <Property Name="codeRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameRegion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sub_Regions" Relationship="Self.FK__Sub_Regio__codeR__72C60C4A" FromRole="Regions" ToRole="Sub_Regions" />
+  </EntityType>
+  <EntityType Name="Remainders">
+    <Key>
+      <PropertyRef Name="codeRemainder" />
+    </Key>
+    <Property Name="codeRemainder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCustomer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__Remainder__idCus__6B24EA82" FromRole="Remainders" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Responses">
+    <Key>
+      <PropertyRef Name="codeResponse" />
+    </Key>
+    <Property Name="codeResponse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codeSiteInTrip" Type="Int32" />
+    <Property Name="question1" Type="Int32" />
+    <Property Name="question2" Type="Int32" />
+    <Property Name="question3" Type="Int32" />
+    <Property Name="question4" Type="Int32" />
+    <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SitesInTrip" Relationship="Self.FK__Responses__codeS__7F2BE32F" FromRole="Responses" ToRole="SitesInTrip" />
+  </EntityType>
+  <EntityType Name="Sites">
+    <Key>
+      <PropertyRef Name="codeSite" />
+    </Key>
+    <Property Name="codeSite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codeSiteKind" Type="Int32" />
+    <Property Name="nameSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codeSub_Region" Type="Int32" />
+    <Property Name="extraLevel" Type="Int32" />
+    <Property Name="minAge" Type="Int32" />
+    <Property Name="maxAge" Type="Int32" />
+    <Property Name="misLiterWater" Type="Int32" />
+    <Property Name="free_notFree" Type="Boolean" />
+    <Property Name="sumToPay" Type="Int32" />
+    <Property Name="car_bus" Type="Boolean" />
+    <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="statusSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SitesKind" Relationship="Self.FK__Sites__codeSiteK__778AC167" FromRole="Sites" ToRole="SitesKind" />
+    <NavigationProperty Name="Sub_Regions" Relationship="Self.FK__Sites__codeSub_R__787EE5A0" FromRole="Sites" ToRole="Sub_Regions" />
+    <NavigationProperty Name="SitesInTrip" Relationship="Self.FK__SitesInTr__codeS__7C4F7684" FromRole="Sites" ToRole="SitesInTrip" />
+  </EntityType>
+  <EntityType Name="SitesInTrip">
+    <Key>
+      <PropertyRef Name="codeSiteInTrip" />
+    </Key>
+    <Property Name="codeSiteInTrip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codeTrip" Type="Int32" />
+    <Property Name="codeSite" Type="Int32" />
+    <NavigationProperty Name="Responses" Relationship="Self.FK__Responses__codeS__7F2BE32F" FromRole="SitesInTrip" ToRole="Responses" />
+    <NavigationProperty Name="Sites" Relationship="Self.FK__SitesInTr__codeS__7C4F7684" FromRole="SitesInTrip" ToRole="Sites" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK__SitesInTr__codeT__7B5B524B" FromRole="SitesInTrip" ToRole="Trips" />
+  </EntityType>
+  <EntityType Name="SitesKind">
+    <Key>
+      <PropertyRef Name="codeSiteKind" />
+    </Key>
+    <Property Name="codeSiteKind" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameSiteKind" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sites" Relationship="Self.FK__Sites__codeSiteK__778AC167" FromRole="SitesKind" ToRole="Sites" />
+  </EntityType>
+  <EntityType Name="Sub_Regions">
+    <Key>
+      <PropertyRef Name="codeSub_Region" />
+    </Key>
+    <Property Name="codeSub_Region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codeRegion" Type="Int32" />
+    <Property Name="nameSub_Region" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Regions" Relationship="Self.FK__Sub_Regio__codeR__72C60C4A" FromRole="Sub_Regions" ToRole="Regions" />
+    <NavigationProperty Name="Sites" Relationship="Self.FK__Sites__codeSub_R__787EE5A0" FromRole="Sub_Regions" ToRole="Sites" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="codeTrip" />
+    </Key>
+    <Property Name="codeTrip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCustomer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="dateTrip" Type="DateTime" Precision="0" />
+    <Property Name="nameTrip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__Trips__idCustome__6E01572D" FromRole="Trips" ToRole="Customers" />
+    <NavigationProperty Name="SitesInTrip" Relationship="Self.FK__SitesInTr__codeT__7B5B524B" FromRole="Trips" ToRole="SitesInTrip" />
+  </EntityType>
+  <Association Name="FK__Remainder__idCus__6B24EA82">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Remainders" Type="Self.Remainders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="Remainders">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Trips__idCustome__6E01572D">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="Trips">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sub_Regio__codeR__72C60C4A">
+    <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+    <End Role="Sub_Regions" Type="Self.Sub_Regions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Regions">
+        <PropertyRef Name="codeRegion" />
+      </Principal>
+      <Dependent Role="Sub_Regions">
+        <PropertyRef Name="codeRegion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Responses__codeS__7F2BE32F">
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="0..1" />
+    <End Role="Responses" Type="Self.Responses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SitesInTrip">
+        <PropertyRef Name="codeSiteInTrip" />
+      </Principal>
+      <Dependent Role="Responses">
+        <PropertyRef Name="codeSiteInTrip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sites__codeSiteK__778AC167">
+    <End Role="SitesKind" Type="Self.SitesKind" Multiplicity="0..1" />
+    <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SitesKind">
+        <PropertyRef Name="codeSiteKind" />
+      </Principal>
+      <Dependent Role="Sites">
+        <PropertyRef Name="codeSiteKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sites__codeSub_R__787EE5A0">
+    <End Role="Sub_Regions" Type="Self.Sub_Regions" Multiplicity="0..1" />
+    <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sub_Regions">
+        <PropertyRef Name="codeSub_Region" />
+      </Principal>
+      <Dependent Role="Sites">
+        <PropertyRef Name="codeSub_Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SitesInTr__codeS__7C4F7684">
+    <End Role="Sites" Type="Self.Sites" Multiplicity="0..1" />
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sites">
+        <PropertyRef Name="codeSite" />
+      </Principal>
+      <Dependent Role="SitesInTrip">
+        <PropertyRef Name="codeSite" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SitesInTr__codeT__7B5B524B">
+    <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
+    <End Role="SitesInTrip" Type="Self.SitesInTrip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="codeTrip" />
+      </Principal>
+      <Dependent Role="SitesInTrip">
+        <PropertyRef Name="codeTrip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SimplyTravelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customers" />
+    <EntitySet Name="Regions" EntityType="Self.Regions" />
+    <EntitySet Name="Remainders" EntityType="Self.Remainders" />
+    <EntitySet Name="Responses" EntityType="Self.Responses" />
+    <EntitySet Name="Sites" EntityType="Self.Sites" />
+    <EntitySet Name="SitesInTrip" EntityType="Self.SitesInTrip" />
+    <EntitySet Name="SitesKind" EntityType="Self.SitesKind" />
+    <EntitySet Name="Sub_Regions" EntityType="Self.Sub_Regions" />
+    <EntitySet Name="Trips" EntityType="Self.Trips" />
+    <AssociationSet Name="FK__Remainder__idCus__6B24EA82" Association="Self.FK__Remainder__idCus__6B24EA82">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Remainders" EntitySet="Remainders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Trips__idCustome__6E01572D" Association="Self.FK__Trips__idCustome__6E01572D">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sub_Regio__codeR__72C60C4A" Association="Self.FK__Sub_Regio__codeR__72C60C4A">
+      <End Role="Regions" EntitySet="Regions" />
+      <End Role="Sub_Regions" EntitySet="Sub_Regions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Responses__codeS__7F2BE32F" Association="Self.FK__Responses__codeS__7F2BE32F">
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+      <End Role="Responses" EntitySet="Responses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sites__codeSiteK__778AC167" Association="Self.FK__Sites__codeSiteK__778AC167">
+      <End Role="SitesKind" EntitySet="SitesKind" />
+      <End Role="Sites" EntitySet="Sites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sites__codeSub_R__787EE5A0" Association="Self.FK__Sites__codeSub_R__787EE5A0">
+      <End Role="Sub_Regions" EntitySet="Sub_Regions" />
+      <End Role="Sites" EntitySet="Sites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SitesInTr__codeS__7C4F7684" Association="Self.FK__SitesInTr__codeS__7C4F7684">
+      <End Role="Sites" EntitySet="Sites" />
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SitesInTr__codeT__7B5B524B" Association="Self.FK__SitesInTr__codeT__7B5B524B">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="SitesInTrip" EntitySet="SitesInTrip" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
