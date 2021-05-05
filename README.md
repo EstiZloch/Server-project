@@ -1,2 +1,2 @@
 # SimplyTravel
-This project help yoy to plan trips easily and more.
+This project help you to plan trips easily and more.
