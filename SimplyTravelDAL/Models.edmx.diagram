@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3b97595cd850464aa35b4e68f524c8c5" Name="Diagram1">
-        <EntityTypeShape EntityType="SimplyTravelModel.Customers" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Regions" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Remainders" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Responses" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Sites" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.SitesInTrip" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.SitesKind" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Sub_Regions" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimplyTravelModel.Trips" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="3b97595cd850464aa35b4e68f524c8c5" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="SimplyTravelModel.Customers" Width="1.5" PointX="7" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Regions" Width="1.5" PointX="4.625" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Remainders" Width="1.5" PointX="11.375" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Responses" Width="1.5" PointX="0.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Sites" Width="1.5" PointX="4.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.SitesInTrip" Width="1.5" PointX="2.375" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.SitesKind" Width="1.5" PointX="2.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Sub_Regions" Width="1.5" PointX="7.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimplyTravelModel.Trips" Width="1.5" PointX="9.375" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="SimplyTravelModel.FK__Remainder__idCus__17F790F9" ManuallyRouted="false" />
         <AssociationConnector Association="SimplyTravelModel.FK__Trips__idCustome__1AD3FDA4" ManuallyRouted="false" />
         <AssociationConnector Association="SimplyTravelModel.FK__Sub_Regio__codeR__04E4BC85" ManuallyRouted="false" />

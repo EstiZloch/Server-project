@@ -197,12 +197,12 @@ namespace SimpltyTravelBLL
                     location += locationAsArray[i];
             }
 
-            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyA_fldfs1rxBgKQMazogjlG_ps1kN48Yx4&query=" + location;
+            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=&query=" + location;
         }
 
         static string BuildUrlForDistance(string place1, string place2)
         {
-            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyA_fldfs1rxBgKQMazogjlG_ps1kN48Yx4&units=imperial&origins=";
+            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=&units=imperial&origins=";
             return url + "place_id:" + place1 + "&destinations=place_id:" + place2;
         }
         #endregion

@@ -139,7 +139,7 @@
   </Association>
   <Association Name="FK__Sub_Regio__codeR__04E4BC85">
     <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
-    <End Role="Sub_Regions" Type="Self.Sub_Regions" Multiplicity="*" />
+    <End Role="Sub_Regions" Type="SimplyTravelModel.Sub_Regions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Regions">
         <PropertyRef Name="codeRegion" />
@@ -174,7 +174,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Sites__codeSub_R__0A9D95DB">
-    <End Role="Sub_Regions" Type="Self.Sub_Regions" Multiplicity="0..1" />
+    <End Role="Sub_Regions" Type="SimplyTravelModel.Sub_Regions" Multiplicity="0..1" />
     <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sub_Regions">
@@ -217,7 +217,7 @@
     <EntitySet Name="Sites" EntityType="Self.Sites" />
     <EntitySet Name="SitesInTrip" EntityType="Self.SitesInTrip" />
     <EntitySet Name="SitesKind" EntityType="Self.SitesKind" />
-    <EntitySet Name="Sub_Regions" EntityType="Self.Sub_Regions" />
+    <EntitySet Name="Sub_Regions" EntityType="SimplyTravelModel.Sub_Regions" />
     <EntitySet Name="Trips" EntityType="Self.Trips" />
     <AssociationSet Name="FK__Remainder__idCus__17F790F9" Association="Self.FK__Remainder__idCus__17F790F9">
       <End Role="Customers" EntitySet="Customers" />
