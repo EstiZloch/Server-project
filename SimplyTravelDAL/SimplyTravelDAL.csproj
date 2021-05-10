@@ -98,6 +98,7 @@
     <Compile Include="SitesKind.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Something.cs" />
     <Compile Include="Sub_Regions.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

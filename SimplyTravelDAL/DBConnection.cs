@@ -32,29 +32,35 @@ namespace SimplyTravelDAL
             Update,
             Delete
         }
+       
         public void Execute<T>(T entity, ExecuteActions exAction) where T : class
         {
-            using (SimplyTravelEntitiesNew s = new SimplyTravelEntitiesNew())
+            try
             {
-                var model = s.Set<T>();
-                switch (exAction)
+                using (SimplyTravelEntitiesNew s = new SimplyTravelEntitiesNew())
                 {
-                    case ExecuteActions.Insert:
-                        model.Add(entity);
-                        break;
-                    case ExecuteActions.Update:
-                        model.Attach(entity);
-                        s.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-                        break;
-                    case ExecuteActions.Delete:
-                        model.Attach(entity);
-                        s.Entry(entity).State = System.Data.Entity.EntityState.Deleted;
-                        break;
-                    default:
-                        break;
+                    var model = s.Set<T>();
+                    switch (exAction)
+                    {
+                        case ExecuteActions.Insert:
+                            model.Add(entity);
+                            break;
+                        case ExecuteActions.Update:
+                            model.Attach(entity);
+                            s.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                            break;
+                        case ExecuteActions.Delete:
+                            model.Attach(entity);
+                            s.Entry(entity).State = System.Data.Entity.EntityState.Deleted;
+                            break;
+                        default:
+                            break;
+                    }
+                    s.SaveChanges();
                 }
-                s.SaveChanges();
             }
+            catch(Exception e)
+            { }
         }
         //private object[] GetKeys<T>(T entity, SimplyTravelEntities context) where T : class
         //{
