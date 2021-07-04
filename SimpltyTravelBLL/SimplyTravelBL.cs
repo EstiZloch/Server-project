@@ -10,7 +10,6 @@ namespace SimpltyTravelBLL
    public class SimplyTravelBL
     {
         DBConnection db;
-        List<Customers> list;
         public SimplyTravelBL()
         {
             db = new DBConnection();
@@ -20,6 +19,10 @@ namespace SimpltyTravelBLL
             IncorrrectDetails,
             NotFound,
             Found
+        }
+        public List<T> GetDbSet<T>()where T:class
+        {
+            return db.GetDbSet<T>();
         }
         public void AddToDB<T>(T entity) where T:class
         {

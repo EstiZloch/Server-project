@@ -38,3 +38,6 @@ C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\obj\Debug\SimplyTravel
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\obj\Debug\SimplyTravelBLL.csproj.CopyComplete
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\obj\Debug\SimpltyTravelBLL.dll
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\obj\Debug\SimpltyTravelBLL.pdb
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.pdb
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.xml

@@ -11,7 +11,7 @@ namespace Models
         public int CodeSite { get; set; }
         public Nullable<int> CodeSiteKind { get; set; }
         public string NameSite { get; set; }
-        public string Address { get; set; }
+        public string Adress { get; set; }
         public Nullable<int> CodeSub_Region { get; set; }
         public Nullable<int> ExtraLevel { get; set; }
         public Nullable<int> MinAge { get; set; }

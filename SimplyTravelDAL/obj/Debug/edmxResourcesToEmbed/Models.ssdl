@@ -5,10 +5,10 @@
       <PropertyRef Name="idCustomer" />
     </Key>
     <Property Name="idCustomer" Type="int" Nullable="false" />
-    <Property Name="passwordCustomer" Type="varchar" MaxLength="6" />
-    <Property Name="checkPassword" Type="varchar" MaxLength="6" />
+    <Property Name="passwordCustomer" Type="nvarchar(max)" />
+    <Property Name="checkPassword" Type="nvarchar(max)" />
     <Property Name="email" Type="varchar(max)" />
-    <Property Name="nameCustomer" Type="varchar(max)" />
+    <Property Name="nameCustomer" Type="nvarchar(max)" />
     <Property Name="extraLevel" Type="int" />
     <Property Name="free_notFree" Type="bit" />
     <Property Name="sumToPay" Type="int" />
@@ -22,7 +22,7 @@
       <PropertyRef Name="codeRegion" />
     </Key>
     <Property Name="codeRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nameRegion" Type="varchar(max)" />
+    <Property Name="nameRegion" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Remainders">
     <Key>
@@ -30,7 +30,7 @@
     </Key>
     <Property Name="codeRemainder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCustomer" Type="int" />
-    <Property Name="describe" Type="varchar(max)" />
+    <Property Name="describe" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Responses">
     <Key>
@@ -43,7 +43,7 @@
     <Property Name="question3" Type="int" />
     <Property Name="question4" Type="int" />
     <Property Name="question5" Type="int" />
-    <Property Name="notes" Type="varchar(max)" />
+    <Property Name="notes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Sites">
     <Key>
@@ -51,8 +51,8 @@
     </Key>
     <Property Name="codeSite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="codeSiteKind" Type="int" />
-    <Property Name="nameSite" Type="varchar(max)" />
-    <Property Name="adress" Type="varchar(max)" />
+    <Property Name="nameSite" Type="nvarchar(max)" />
+    <Property Name="adress" Type="nvarchar(max)" />
     <Property Name="codeSub_Region" Type="int" />
     <Property Name="extraLevel" Type="int" />
     <Property Name="minAge" Type="int" />
@@ -78,7 +78,7 @@
       <PropertyRef Name="codeSiteKind" />
     </Key>
     <Property Name="codeSiteKind" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nameSiteKind" Type="varchar(max)" />
+    <Property Name="nameSiteKind" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Sub_Regions">
     <Key>
@@ -86,7 +86,7 @@
     </Key>
     <Property Name="codeSub_Region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="codeRegion" Type="int" />
-    <Property Name="nameSub_Region" Type="varchar(max)" />
+    <Property Name="nameSub_Region" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Trips">
     <Key>
@@ -95,7 +95,7 @@
     <Property Name="codeTrip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCustomer" Type="int" />
     <Property Name="dateTrip" Type="date" />
-    <Property Name="nameTrip" Type="varchar(max)" />
+    <Property Name="nameTrip" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK__Remainder__idCus__17F790F9">
     <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />

@@ -7,54 +7,57 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class SiteKindBL
+    class SiteKindBL:SimplyTravelBL
     {
-        DBConnection db;
-        SimplyTravelBL s = new SimplyTravelBL();
+     
         public SiteKindBL()
         {
-            db = new DBConnection();
         }
         //get sitekind by kind
-        private SiteKindModel GetSiteKindByKind(string kind)
+        public SiteKindModel GetSiteKindByKind(string kind)
         {
-            return SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToModel(db.GetDbSet<SitesKind>().First(c => c.nameSiteKind == kind));
+            return SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToModel(GetDbSet<SitesKind>().First(c => c.nameSiteKind == kind));
+        }
+        //get sitekind by code
+        public SiteKindModel GetSiteKindByCode(int code)
+        {
+            return SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToModel(GetDbSet<SitesKind>().First(c => c.codeSiteKind == code));
         }
         //add a siteKind
-        public SimplyTravelBL.Result AddSiteKind(string kind)
+        public int AddSiteKind(string kind)
         {
             //check if sitekind exist in DB
             if (GetSiteKindByKind(kind) != null)
             {
                 //if exist
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             }
             //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
             //    return SimplyTravelBL.Result.IncorrrectDetails;
             //------------validation 
             SiteKindModel c = new SiteKindModel() { NameSiteKind=kind,CodeSiteKind=1};
-            if (db.GetDbSet<SitesKind>().ToList().Count > 0)
-                c.CodeSiteKind = db.GetDbSet<SitesKind>().ToList().Last().codeSiteKind + 1;
+            if (GetDbSet<SitesKind>().ToList().Count > 0)
+                c.CodeSiteKind = GetDbSet<SitesKind>().ToList().Last().codeSiteKind + 1;
             //add new sitekind to the sitekinds list
-            s.AddToDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(c));
-            return SimplyTravelBL.Result.Found;
+            AddToDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(c));
+            return c.CodeSiteKind;
         }
         //delete a siteKind
-        private SimplyTravelBL.Result DeleteSiteKind(string kind)
+        private int DeleteSiteKind(string kind)
         {
             var site = GetSiteKindByKind(kind);
             if (site == null)
-                return SimplyTravelBL.Result.NotFound;
-            s.DeleteDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(site));
-            return SimplyTravelBL.Result.Found;
+                return 0;
+            DeleteDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(site));
+            return 1;
         }
-        private SimplyTravelBL.Result UpdateSiteKind(SiteKindModel c)
+        private int UpdateSiteKind(SiteKindModel c)
         {
             if (GetSiteKindByKind(c.NameSiteKind) == null)
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             //------------validation 
-            s.UpdateDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(c));
-            return SimplyTravelBL.Result.Found;
+            UpdateDB<SitesKind>(SimplyTravelDAL.Converts.SiteKindConvert.ConvertSiteKindToEF(c));
+            return 1;
         }
     }
 }

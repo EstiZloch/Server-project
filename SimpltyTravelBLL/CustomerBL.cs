@@ -6,35 +6,39 @@ using System.Text;
 using System.Threading.Tasks;
 using SimplyTravelDAL;
 using Models;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Timers;
+using Models.Models;
+
 namespace SimpltyTravelBLL
 {
-    public class CustomerBL
+    public class CustomerBL : SimplyTravelBL
     {
-        DBConnection db;
-        SimplyTravelBL s = new SimplyTravelBL();
         public CustomerBL()
         {
-            db = new DBConnection();
+
         }
         //get all the trips to a specific customer
         public List<TripModel> GetTripsPerCustomer(int id)
         {
-            return SimplyTravelDAL.Converts.TripConvert.ConvertTripListToModel(db.GetDbSet<Trips>().Where(s => s.idCustomer == id));
+            return SimplyTravelDAL.Converts.TripConvert.ConvertTripListToModel(GetDbSet<Trips>().Where(s => s.idCustomer == id));
         }
         //get all the sites that a specific customer was there
         public List<SiteInTripModel> GetSitesPerCustomer(int id)
         {
             SiteInTripBL site = new SiteInTripBL();
-            var list=this.GetTripsPerCustomer(id).OrderByDescending(c=>c.DateTrip );
+            var list = this.GetTripsPerCustomer(id).OrderByDescending(c => c.DateTrip);
             List<SiteInTripModel> returListn = new List<SiteInTripModel>();
             foreach (var v in list)
                 returListn.Add(site.GetSitesInTripByCodeTrip(v.CodeTrip));
             return returListn;
         }
         //get a customer by id
-        private CustomerModel GetCustomerById(int id)
+        public CustomerModel GetCustomerById(int id)
         {
-           List<CustomerModel> customer = SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerListToModel(db.GetDbSet<Customers>());
+            List<CustomerModel> customer = SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerListToModel(GetDbSet<Customers>());
             if (customer != null)
                 return customer.Find(c => c.IdCustomer == id);
             return null;
@@ -46,9 +50,9 @@ namespace SimpltyTravelBLL
             //if the customer doesn't exist in the DB
             if (customer == null)
             {
-                s.AddToDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customerNew));
+                AddToDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customerNew));
             }
-           else
+            else
             //if exist, check if the password is not correct return 0
             {
                 if (!customer.PasswordCustomer.Equals(customerNew.PasswordCustomer))
@@ -59,7 +63,6 @@ namespace SimpltyTravelBLL
         //sign in function
         public int SignIn(int id, string password)
         {
-            var c = db.GetDbSet<Customers>();
             var customer = GetCustomerById(id);
             //check if in the user is in the db and his password is correct
             if (customer != null && customer.PasswordCustomer.Equals(password))
@@ -78,7 +81,7 @@ namespace SimpltyTravelBLL
             var customer = this.GetCustomerById(id);
             string statusRet = customer.StatusCustomer;
             customer.StatusCustomer = status;
-            s.UpdateDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customer));
+            UpdateDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customer));
             return statusRet;
         }
         //delete a customer
@@ -87,7 +90,7 @@ namespace SimpltyTravelBLL
             var customer = GetCustomerById(id);
             if (customer == null)
                 return SimplyTravelBL.Result.NotFound;
-            s.DeleteDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customer));
+            DeleteDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(customer));
             return SimplyTravelBL.Result.Found;
         }
         //verify password and mail
@@ -105,8 +108,43 @@ namespace SimpltyTravelBLL
             if (GetCustomerById(c.IdCustomer) == null)
                 return SimplyTravelBL.Result.NotFound;
             //------------validation 
-            s.UpdateDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(c));
+            UpdateDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(c));
             return SimplyTravelBL.Result.Found;
         }
+        public void ConfirmPassword(int id, string password)
+        {
+            CustomerModel c;
+            using (SimplyTravelEntitiesNew db = new SimplyTravelEntitiesNew())
+            {
+                c = SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToModel(db.Customers.FirstOrDefault(d => d.idCustomer == id));
+                c.PasswordCustomer = password;
+                c.CheckPassword = password;
+                UpdateCustomer(c);
+            }
+        }
+        public int SendEmail(CustomerModel c)
+        {
+                Random rand = new Random();
+                int newPassword = rand.Next(111111, 999999);
+                SimpltyTravelBLL.CustomerBL bl = new SimpltyTravelBLL.CustomerBL();
+                bl.ConfirmPassword(c.IdCustomer, newPassword.ToString());
+                SendMail sendMail = new SendMail("SimplyTravel","Ester0556708556@gmail.com","");
+            string body = "";
+            string subject = string.Format(" אימות סיסמא למשתמש {0}" , c.NameCustomer) ;
+            body += "\nלתשומת לבך, מצורפת סיסמתך החדשה לכניסה למערכת";
+            body += string.Format(" :סיסמתך החדשה היא {0}", newPassword);
+            //מבצע את השליחה
+            bool mailSend = true;
+            mailSend = sendMail.SendEMail(new MessageGmail()
+            {
+                sendTo = c.Email,
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            });
+
+            return 0;
+        }
     }
+
 }

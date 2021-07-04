@@ -15,10 +15,12 @@ namespace SimplyTravelDAL
 {
     public class DBConnection
     {
+        //Constructor
         public DBConnection()
         {
 
         }
+        //Generic function that get the list of the model from the DB
         public List<T> GetDbSet<T>() where T : class
         {
             using (SimplyTravelEntitiesNew s = new SimplyTravelEntitiesNew())
@@ -32,23 +34,27 @@ namespace SimplyTravelDAL
             Update,
             Delete
         }
-       
+       //Generic function that insert/update/delete a model in the DB
         public void Execute<T>(T entity, ExecuteActions exAction) where T : class
         {
             try
             {
                 using (SimplyTravelEntitiesNew s = new SimplyTravelEntitiesNew())
                 {
+                    //the list of the models
                     var model = s.Set<T>();
                     switch (exAction)
                     {
+                        //Insert
                         case ExecuteActions.Insert:
                             model.Add(entity);
                             break;
+                            //Update
                         case ExecuteActions.Update:
                             model.Attach(entity);
                             s.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                             break;
+                            //Delete
                         case ExecuteActions.Delete:
                             model.Attach(entity);
                             s.Entry(entity).State = System.Data.Entity.EntityState.Deleted;
@@ -56,12 +62,14 @@ namespace SimplyTravelDAL
                         default:
                             break;
                     }
+                    //save the changes
                     s.SaveChanges();
                 }
             }
             catch(Exception e)
             { }
         }
+    }
         //private object[] GetKeys<T>(T entity, SimplyTravelEntities context) where T : class
         //{
         //    ObjectContext objectContext = ((IObjectContextAdapter)context).ObjectContext;
@@ -80,4 +88,3 @@ namespace SimplyTravelDAL
         //}
 
     }
-}

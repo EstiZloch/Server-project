@@ -8,8 +8,18 @@ using SimpltyTravelBLL;
 using Models;
 namespace SimplyTravelGui.Controllers
 {
-    [Route("API/Regions")]
+    [RoutePrefix("api/regions")]
     public class RegionsController : ApiController
     {
+        RegionBL r = new RegionBL();
+            [AcceptVerbs("GET", "POST")]
+            [Route("getRegions")]
+            [HttpGet]
+            public List<RegionModel> getRegions()
+            {
+            return  r.GetListRegionNames();
+            }
+
+        }
     }
-}
+

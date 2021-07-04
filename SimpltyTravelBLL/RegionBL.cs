@@ -7,65 +7,68 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class RegionBL
+   public class RegionBL:SimplyTravelBL
     {
-        DBConnection db;
-        SimplyTravelBL s = new SimplyTravelBL();
+      
         public RegionBL()
         {
-            db = new DBConnection();
+ 
         }
         //get a region by code
-        private RegionModel GetRegionById(int code)
+        public RegionModel GetRegionById(int code)
         {
-            return SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToModel(db.GetDbSet<Regions>().First(c => c.codeRegion == code));
+            return SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToModel(GetDbSet<Regions>().First(c => c.codeRegion == code));
+        }
+        //get a list of the region names
+        public List<RegionModel> GetListRegionNames()
+        {
+            return SimplyTravelDAL.Converts.RegionConvert.ConvertRegionrListToModel(GetDbSet<Regions>().ToList());
         }
         //get a region by name
-        private RegionModel GetRegionByName(string name)
+        public RegionModel GetRegionByName(string name)
         {
-            return SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToModel(db.GetDbSet<Regions>().First(c => c.nameRegion == name));
+            return SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToModel(GetDbSet<Regions>().First(c => c.nameRegion == name));
         }
         //get all the subRegion in a specific region
-        public List<Sub_RegionModel> GetSitesPerTrip(int codeR)
+        public List<Sub_RegionModel> GetSubRegionOfRegion(int codeR)
         {
-            return SimplyTravelDAL.Converts.SubRegionConvert.ConvertSubRegionListToModel(db.GetDbSet<Sub_Regions>().Where(s => s.codeRegion == codeR).ToList());
+            return SimplyTravelDAL.Converts.SubRegionConvert.ConvertSubRegionListToModel(GetDbSet<Sub_Regions>().Where(s => s.codeRegion == codeR).ToList());
         }
         //sign up function
-        public SimplyTravelBL.Result AddRegion(string name)
+        public int AddRegion(string name)
         {
             //check if region exist in DB
             if (GetRegionByName(name) != null)
             {
                 //if exist
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             }
-            if (!Validation.IsHebrew(name))
-                return SimplyTravelBL.Result.IncorrrectDetails;
             //------------validation 
             RegionModel c = new RegionModel() { CodeRegion = 1, NameRegion = name };
-            if (db.GetDbSet<Regions>().ToList().Count > 0)
-                c.CodeRegion = db.GetDbSet<Regions>().ToList().Last().codeRegion + 1;
+            if (GetDbSet<Regions>().ToList().Count > 0)
+                c.CodeRegion = GetDbSet<Regions>().ToList().Last().codeRegion + 1;
             //add new region to the regions list
-            s.AddToDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(c));
-            return SimplyTravelBL.Result.Found;
+            AddToDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(c));
+            return c.CodeRegion;
         }
         //delete a region
-        private SimplyTravelBL.Result Deleteregion(string name)
+        private int Deleteregion(string name)
         {
             var reg = GetRegionByName(name);
             if (reg == null)
-                return SimplyTravelBL.Result.NotFound;
-            s.DeleteDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(reg));
+                return 0;
+            DeleteDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(reg));
             //לבדוק אם צריך להוסיף פה את העדכון של הקודים שאחרי האיבר הנמחק
-            return SimplyTravelBL.Result.Found;
+            return 1;
         }
-        private SimplyTravelBL.Result UpdateRegion(RegionModel r)
+        private int UpdateRegion(string newName)
         {
-            if (GetRegionById(r.CodeRegion) == null)
-                return SimplyTravelBL.Result.NotFound;
+            RegionModel r = GetRegionByName(newName);
+            if ( r== null)
+                return 0;
             //------------validation 
-            s.UpdateDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(r));
-            return SimplyTravelBL.Result.Found;
+            UpdateDB<Regions>(SimplyTravelDAL.Converts.RegionConvert.ConvertRegionToEF(r));
+            return 1;
         }
 
     }

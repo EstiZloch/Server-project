@@ -5,10 +5,10 @@
       <PropertyRef Name="idCustomer" />
     </Key>
     <Property Name="idCustomer" Type="Int32" Nullable="false" />
-    <Property Name="passwordCustomer" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Name="checkPassword" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="passwordCustomer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="checkPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="nameCustomer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameCustomer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="extraLevel" Type="Int32" />
     <Property Name="free_notFree" Type="Boolean" />
     <Property Name="sumToPay" Type="Int32" />
@@ -24,7 +24,7 @@
       <PropertyRef Name="codeRegion" />
     </Key>
     <Property Name="codeRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nameRegion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameRegion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Sub_Regions" Relationship="Self.FK__Sub_Regio__codeR__04E4BC85" FromRole="Regions" ToRole="Sub_Regions" />
   </EntityType>
   <EntityType Name="Remainders">
@@ -33,7 +33,7 @@
     </Key>
     <Property Name="codeRemainder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idCustomer" Type="Int32" />
-    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customers" Relationship="Self.FK__Remainder__idCus__17F790F9" FromRole="Remainders" ToRole="Customers" />
   </EntityType>
   <EntityType Name="Responses">
@@ -47,7 +47,7 @@
     <Property Name="question3" Type="Int32" />
     <Property Name="question4" Type="Int32" />
     <Property Name="question5" Type="Int32" />
-    <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SitesInTrip" Relationship="Self.FK__Responses__codeS__25518C17" FromRole="Responses" ToRole="SitesInTrip" />
   </EntityType>
   <EntityType Name="Sites">
@@ -56,8 +56,8 @@
     </Key>
     <Property Name="codeSite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="codeSiteKind" Type="Int32" />
-    <Property Name="nameSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="codeSub_Region" Type="Int32" />
     <Property Name="extraLevel" Type="Int32" />
     <Property Name="minAge" Type="Int32" />
@@ -89,7 +89,7 @@
       <PropertyRef Name="codeSiteKind" />
     </Key>
     <Property Name="codeSiteKind" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nameSiteKind" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameSiteKind" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Sites" Relationship="Self.FK__Sites__codeSiteK__09A971A2" FromRole="SitesKind" ToRole="Sites" />
   </EntityType>
   <EntityType Name="Sub_Regions">
@@ -98,7 +98,7 @@
     </Key>
     <Property Name="codeSub_Region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="codeRegion" Type="Int32" />
-    <Property Name="nameSub_Region" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameSub_Region" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Regions" Relationship="Self.FK__Sub_Regio__codeR__04E4BC85" FromRole="Sub_Regions" ToRole="Regions" />
     <NavigationProperty Name="Sites" Relationship="Self.FK__Sites__codeSub_R__0A9D95DB" FromRole="Sub_Regions" ToRole="Sites" />
   </EntityType>
@@ -109,7 +109,7 @@
     <Property Name="codeTrip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idCustomer" Type="Int32" />
     <Property Name="dateTrip" Type="DateTime" Precision="0" />
-    <Property Name="nameTrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nameTrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Customers" Relationship="Self.FK__Trips__idCustome__1AD3FDA4" FromRole="Trips" ToRole="Customers" />
     <NavigationProperty Name="SitesInTrip" Relationship="Self.FK__SitesInTr__codeT__2180FB33" FromRole="Trips" ToRole="SitesInTrip" />
   </EntityType>

@@ -96,3 +96,7 @@ C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\EntityFramework.xml
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\obj\Debug\SimplyTravelAPI.csprojAssemblyReference.cache
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\EntityFramework.SqlServer.dll
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\EntityFramework.SqlServer.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\GW2NET.Core.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\GW2NET.Newtonsoft.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\GW2NET.Core.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelAPI\bin\GW2NET.Newtonsoft.xml

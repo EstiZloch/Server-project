@@ -8,14 +8,14 @@ using SimpltyTravelBLL;
 using Models;
 namespace SimplyTravelGui.Controllers
 {
-    //post-כל מה שעושה שינויים בדטה בייס
+    //post- כל מה שעושה שינויים בדטה בייס
     //get-מה שלא עושה שינויים בדטה בייס
   //  [Route("API/[Controller]")]
     [RoutePrefix("api/customers")]
     public class CustomersController : ApiController
     {
         CustomerBL customerBL = new CustomerBL();
-        [AcceptVerbs("GET", "POST", "OPTIONS", "HEAD")]
+        [AcceptVerbs("GET", "POST")]
         [Route("signIn/{id}/{password}")] 
         [HttpGet]
         //access to the user's account.
@@ -24,16 +24,24 @@ namespace SimplyTravelGui.Controllers
              return customerBL.SignIn(id,password);
     }
         
-        [AcceptVerbs("GET", "POST", "OPTIONS","HEAD")]
+        [AcceptVerbs("GET", "POST")]
         [Route("signUp")]
         [HttpPost]
-        public int signUp( CustomerModel c)
+        public int signUp(CustomerModel c)
         {
            return this.AddNewCustomer(c);
         }
         public int AddNewCustomer(CustomerModel c)
         {
             return customerBL.SignUP(c);
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("ConfirmPassword")]
+        [HttpPost]
+        public int ConfirmPassword(CustomerModel c)
+        {
+            customerBL.SendEmail(c);
+            return c.IdCustomer;
         }
     }
 }

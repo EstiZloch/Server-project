@@ -9,6 +9,10 @@ namespace SimplyTravelDAL.Converts
 {
     public static class CustomerConvert
     {
+
+        //function to convert an entity from model type to entity framework type
+        //Input:A Model entity
+        //Output:An entity framework entity
         public static Customers ConvertCustomerToEF(CustomerModel customer)
         {
             return new Customers
@@ -27,8 +31,12 @@ namespace SimplyTravelDAL.Converts
                 statusCustomer = customer.StatusCustomer
             };
         }
+        //function to convert an entity from entity framework type to model type
+        //Input:An entity framework entity
+        //Output:A Model entity
         public static CustomerModel ConvertCustomerToModel(Customers customer)
         {
+           
             return new CustomerModel
             {
                 IdCustomer = customer.idCustomer,
@@ -45,9 +53,10 @@ namespace SimplyTravelDAL.Converts
                 StatusCustomer = customer.statusCustomer
             };
         }
-
-
-
+        //function to convert a list of entities from model type to a list of 
+        //entities from entity framework type
+        //Input:An entity framework entity
+        //Output:A Model entity
         public static List<CustomerModel> ConvertCustomerListToModel(IEnumerable<Customers> customers)
         {
             return customers.Select(c => ConvertCustomerToModel(c)).OrderBy(n => n.IdCustomer).ToList();

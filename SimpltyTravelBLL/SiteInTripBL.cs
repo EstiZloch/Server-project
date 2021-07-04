@@ -7,59 +7,57 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class SiteInTripBL
+    class SiteInTripBL:SimplyTravelBL
     {
-        DBConnection db;
-        SimplyTravelBL s = new SimplyTravelBL();
+      
         public SiteInTripBL()
         {
-            db = new DBConnection();
         }
         //get site in trip by code trip
         public SiteInTripModel GetSitesInTripByCodeTrip(int codeT)
         {
-            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(db.GetDbSet<SitesInTrip>().First(c => c.codeTrip == codeT));
+            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(GetDbSet<SitesInTrip>().First(c => c.codeTrip == codeT));
         }
         //get site in trip by code site and code trip
         public SiteInTripModel GetSiteInTripByCodeSiteAndCodeTrip(int codeT,int codeS)
         {
-            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(db.GetDbSet<SitesInTrip>().First(c => c.codeSite == codeS && c.codeTrip==codeT));
+            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(GetDbSet<SitesInTrip>().First(c => c.codeSite == codeS && c.codeTrip==codeT));
         }
         //add a site in trip
-        public SimplyTravelBL.Result AddSiteInTrip(int codeT, int codeS)
+        public int AddSiteInTrip(int codeT, int codeS)
         {
             //check if site in trip exist in DB
             if (GetSiteInTripByCodeSiteAndCodeTrip(codeT,codeS) != null)
             {
                 //if exist
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             }
             //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
             //    return SimplyTravelBL.Result.IncorrrectDetails;
             ////------------validation 
             SiteInTripModel c = new SiteInTripModel() { CodeTrip=codeT,CodeSite=codeS,CodeSiteInTrip=1 };
-            if (db.GetDbSet<SitesInTrip>().ToList().Count > 0)
-                c.CodeSiteInTrip = db.GetDbSet<SitesInTrip>().ToList().Last().codeSiteInTrip + 1;
+            if (GetDbSet<SitesInTrip>().ToList().Count > 0)
+                c.CodeSiteInTrip = GetDbSet<SitesInTrip>().ToList().Last().codeSiteInTrip + 1;
             //add new siteInTrip to the sitesInTrip list
-            s.AddToDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(c));
-            return SimplyTravelBL.Result.Found;
+            AddToDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(c));
+            return c.CodeSiteInTrip;
         }
         //delete a site in trip
-        private SimplyTravelBL.Result DeleteSitIntrip(int codeS,int codeT)
+        private int DeleteSitIntrip(int codeS,int codeT)
         {
             var siteIn = GetSiteInTripByCodeSiteAndCodeTrip(codeT,codeS);
             if (siteIn == null)
-                return SimplyTravelBL.Result.NotFound;
-            s.DeleteDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(siteIn));
-            return SimplyTravelBL.Result.Found;
+                return 0;
+            DeleteDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(siteIn));
+            return 1;
         }
-        private SimplyTravelBL.Result UpdateSiteInTrip(SiteInTripModel c)
+        private int UpdateSiteInTrip(SiteInTripModel c)
         {
             if (GetSiteInTripByCodeSiteAndCodeTrip(c.CodeTrip.Value,c.CodeSite.Value) == null)
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             //------------validation 
-            s.UpdateDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(c));
-            return SimplyTravelBL.Result.Found;
+            UpdateDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(c));
+            return 1;
         }
     }
 }

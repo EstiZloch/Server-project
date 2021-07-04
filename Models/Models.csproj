@@ -51,18 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerModel.cs" />
+    <Compile Include="MessageGmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionModel.cs" />
     <Compile Include="ReminderModel.cs" />
     <Compile Include="ResponseModel.cs" />
+    <Compile Include="SendMail.cs" />
     <Compile Include="SiteInTripModel.cs" />
     <Compile Include="SiteKindModel.cs" />
     <Compile Include="SiteModel.cs" />
+    <Compile Include="SiteToDisplay.cs" />
     <Compile Include="Sub_RegionModel.cs" />
     <Compile Include="TripModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

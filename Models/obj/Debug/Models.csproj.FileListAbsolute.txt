@@ -17,7 +17,6 @@ C:\development\SimplyTravel\SimplyTravel\Models\bin\Debug\EntityFramework.dll
 C:\development\SimplyTravel\SimplyTravel\Models\bin\Debug\EntityFramework.SqlServer.dll
 C:\development\SimplyTravel\SimplyTravel\Models\bin\Debug\EntityFramework.xml
 C:\development\SimplyTravel\SimplyTravel\Models\bin\Debug\EntityFramework.SqlServer.xml
-C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csprojAssemblyReference.cache
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csproj.CopyComplete
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.dll

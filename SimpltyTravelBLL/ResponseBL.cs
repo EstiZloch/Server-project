@@ -7,13 +7,12 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class ResponseBL
+    class ResponseBL:SimplyTravelBL
     {
-        DBConnection db;
-        SimplyTravelBL s = new SimplyTravelBL();
+   
+        
         public ResponseBL()
         {
-            db = new DBConnection();
         }
         //get a response by IdCustomer and code site
         private bool GetResponseByCodeToSiteToSpecifiecCustomer(int code,int id)
@@ -30,42 +29,42 @@ namespace SimpltyTravelBLL
         //get a response by CodeSiteInTrip
         private ResponseModel GetResponseByCode(int code)
         {
-            return SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToModel(db.GetDbSet<Responses>().First(c => c.codeSiteInTrip == code));
+            return SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToModel(GetDbSet<Responses>().First(c => c.codeSiteInTrip == code));
         }
         //add a response
-        public SimplyTravelBL.Result AddResponse(int code,int q1,int q2,int q3,int q4,string note)
+        public int AddResponse(int code,int q1,int q2,int q3,int q4,string note)
         {
             //check if response exist in DB
             if (GetResponseByCode(code) != null)
             {
                 //if exist
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             }
             //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
             //    return SimplyTravelBL.Result.IncorrrectDetails;
             //------------validation 
             ResponseModel r = new ResponseModel() { CodeResponse = 1, CodeSiteInTrip = code, Question1 = q1, Question2 = q2, Question3 = q3, Question4 = q4, Notes = note };
             //add new response to the responses list
-            s.AddToDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(r));
-            return SimplyTravelBL.Result.Found;
+            AddToDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(r));
+            return r.CodeResponse;
         }
-        //delete a customer
-        private SimplyTravelBL.Result DeleteResponse(int code)
+        //delete a response
+        private int DeleteResponse(int code)
         {
             var response = GetResponseByCode(code);
             if (response == null)
-                return SimplyTravelBL.Result.NotFound;
-            s.DeleteDB<Responses> (SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(response));
-            return SimplyTravelBL.Result.Found;
+                return 0;
+            DeleteDB<Responses> (SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(response));
+            return 1;
         }
         //update a response
-        private SimplyTravelBL.Result UpdateResponse(ResponseModel r)
+        private int UpdateResponse(ResponseModel r)
         {
             if (GetResponseByCode(r.CodeSiteInTrip.Value) == null)
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             //------------validation 
-            s.UpdateDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(r));
-            return SimplyTravelBL.Result.Found;
+            UpdateDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(r));
+            return 1;
         }
     }
 }
