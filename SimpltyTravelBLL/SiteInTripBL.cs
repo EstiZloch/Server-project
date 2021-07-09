@@ -7,40 +7,31 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class SiteInTripBL:SimplyTravelBL
+  public  class SiteInTripBL:SimplyTravelBL
     {
       
         public SiteInTripBL()
         {
         }
         //get site in trip by code trip
-        public SiteInTripModel GetSitesInTripByCodeTrip(int codeT)
+        public List<SiteInTripModel> GetSitesInTripByCodeTrip(int codeT)
         {
-            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(GetDbSet<SitesInTrip>().First(c => c.codeTrip == codeT));
+            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripListToModel(GetDbSet<SitesInTrip>().Where(s=>s.codeTrip==codeT).ToList());
+         
         }
         //get site in trip by code site and code trip
         public SiteInTripModel GetSiteInTripByCodeSiteAndCodeTrip(int codeT,int codeS)
         {
             return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToModel(GetDbSet<SitesInTrip>().First(c => c.codeSite == codeS && c.codeTrip==codeT));
         }
-        //add a site in trip
-        public int AddSiteInTrip(int codeT, int codeS)
+        //add a site in trip;
+        public int AddSiteInTrip(SiteInTripToAdd c)
         {
-            //check if site in trip exist in DB
-            if (GetSiteInTripByCodeSiteAndCodeTrip(codeT,codeS) != null)
-            {
-                //if exist
-                return 0;
-            }
-            //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
-            //    return SimplyTravelBL.Result.IncorrrectDetails;
-            ////------------validation 
-            SiteInTripModel c = new SiteInTripModel() { CodeTrip=codeT,CodeSite=codeS,CodeSiteInTrip=1 };
-            if (GetDbSet<SitesInTrip>().ToList().Count > 0)
-                c.CodeSiteInTrip = GetDbSet<SitesInTrip>().ToList().Last().codeSiteInTrip + 1;
+            SiteBL sBL = new SiteBL();
+            SiteInTripModel s = new SiteInTripModel() { CodeTrip = c.CodeTrip, CodeSite = sBL.GetSiteByName(c.NameSite).CodeSite };
             //add new siteInTrip to the sitesInTrip list
-            AddToDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(c));
-            return c.CodeSiteInTrip;
+            AddToDB<SitesInTrip>(SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripToEF(s));
+            return c.CodeTrip;
         }
         //delete a site in trip
         private int DeleteSitIntrip(int codeS,int codeT)

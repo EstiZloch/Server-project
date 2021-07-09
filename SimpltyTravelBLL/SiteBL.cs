@@ -28,7 +28,7 @@ namespace SimpltyTravelBLL
         {
         }
         //get site by name
-        private SiteModel GetSiteByName(string name)
+        public SiteModel GetSiteByName(string name)
         {
             List<SiteModel> site = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(GetDbSet<Sites>());
             if (site != null)

@@ -7,7 +7,7 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class TripBL:SimplyTravelBL
+   public class TripBL:SimplyTravelBL
     {
        
         public TripBL()
@@ -24,23 +24,14 @@ namespace SimpltyTravelBLL
            return SimplyTravelDAL.Converts.SiteInTripConvert.ConvertSiteInTripListToModel(GetDbSet<SitesInTrip>().Where(s => s.codeTrip == CodeTrip).ToList());
         }
         //add a trip
-        public int AddTrip(int id, DateTime date)
+        public int AddTrip(TripModel t)
         {
-            //check if trip exist in DB
-            if (GetTripByIdAndDate(id,date) != null)
-            {
-                //if exist
-                return 0;
-            }
-            //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
-            //    return SimplyTravelBL.Result.IncorrrectDetails;
-            //------------validation 
-            TripModel c = new TripModel() { IdCustomer = id, DateTrip = date, CodeTrip=1 };
-            if (GetDbSet<Trips>().ToList().Count > 0)
-                c.CodeTrip = GetDbSet<Trips>().ToList().Last().codeTrip + 1;
+            SiteBL siteBl = new SiteBL();
+            SiteInTripBL siteInTripBl = new SiteInTripBL();
+            TripModel c = new TripModel() { IdCustomer = t.IdCustomer, DateTrip = DateTime.Today,NameTrip=t.NameTrip };
             //add new trip to the trips list
             AddToDB<Trips>(SimplyTravelDAL.Converts.TripConvert.ConvertTripToEF(c));
-            return c.CodeTrip;
+            return GetDbSet<Trips>()[GetDbSet<Trips>().Count - 1].codeTrip; 
         }
         //delete a trip
         private int DeleteTrip(int id,DateTime date)

@@ -21,3 +21,4 @@ C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csproj.CoreComp
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csproj.CopyComplete
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.dll
 C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.pdb
+C:\development\SimplyTravel\SimplyTravel\Models\obj\Debug\Models.csprojAssemblyReference.cache

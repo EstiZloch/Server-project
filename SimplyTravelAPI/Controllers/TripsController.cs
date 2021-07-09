@@ -8,8 +8,17 @@ using SimpltyTravelBLL;
 using Models;
 namespace SimplyTravelGui.Controllers
 {
-    [Route("API/Trips")]
+    [RoutePrefix("api/trips")]
     public class TripsController : ApiController
     {
+        TripBL tripBl = new TripBL();
+        [AcceptVerbs("GET", "POST")]
+        [Route("addTrip")]
+        [HttpPost]
+        public int addTrip(TripModel t)
+        {
+            return tripBl.AddTrip(t);
+        }
+
     }
 }

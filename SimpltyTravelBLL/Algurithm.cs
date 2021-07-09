@@ -28,16 +28,22 @@ namespace SimpltyTravelBLL
             { true, 7 },
             { false, 14 }
         };
+        ResponseBL r = new ResponseBL();
         //arr of num of the site each type in a trip 
         double[] numOfSitesOfType;
         int numForRand;
+        CustomerBL c = new CustomerBL();
         #region function
         //יצירת הרכב טיולים ללקוח
         //car_bus?true-car:false:bus
-        public Dictionary<int, List<SiteModel>> CreateTravels(int MinAge, int MaxAge, bool Car_bus, 
-            bool halfDay_allDay, int codeSubRegion,string myAddress)
+        public  List<string>[] CreateTravels(int MinAge, int MaxAge, bool Car_bus, 
+            bool halfDay_allDay, int codeSubRegion,string myAddress,int idCustomer)
         {
-
+            if(idCustomer!=-1)
+            {
+                List<SiteInTripModel> siteInTrip = c.GetSitesPerCustomer(idCustomer);
+                listOfSites = dbCon.GetDbSet<Sites>().Where(site=>r.GetResponseByCodeToSiteToSpecifiecCustomer(idCustomer, site.codeSite,siteInTrip)==true).ToList();
+            }
             if (codeSubRegion >= 0)
             {
                 numForRand = 4;
@@ -48,11 +54,11 @@ namespace SimpltyTravelBLL
             }
             else
             {
-                numForRand = 10;
+                numForRand = 2;
                 listOfSites = dbCon.GetDbSet<Sites>();
             }
             //dictionary of 5 options to trips
-            Dictionary<int, List<SiteModel>> dictOfTrips = new Dictionary<int, List<SiteModel>>();
+           List<string> [] listToRe = new List<string>[5];
             //list of coffee shops 
             List<SiteModel> coffeeShops =SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel( listOfSites.Where(i => i.codeSiteKind == 2).ToList());
             //list of restaurants
@@ -83,6 +89,7 @@ namespace SimpltyTravelBLL
             //number of sites in a trip
             //get the average time to a site
             SiteBL s = new SiteBL();
+            List<string> ListToCheck;
             int avg = s.GetAvgTime();
             //local variable
             double misLeft;
@@ -103,51 +110,61 @@ namespace SimpltyTravelBLL
                     numOfSitesOfType[4]--;
                     numOfSitesOfType[8]--;
                 }
+                if(i==1)
+                {
+                    numOfSitesOfType[4]--;
+                    numOfSitesOfType[8]--;
+                }
                 //Refresh
                   if (i > 0)
                 {
-                    coffeeShops = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 1).ToList());
+                    coffeeShops = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 3).ToList());
                     restaurants = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 2).ToList());
-                    tombs = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 3).ToList());
+                    tombs = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 1).ToList());
                     natureReserves = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 8).ToList());
                     museuns = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 9).ToList());
                     if (i == 1)
                     {
-                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4
+                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7
                         && c.extraLevel==1).ToList());
-                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5 
+                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6 
                         && c.extraLevel == 1).ToList());
-                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6 
+                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5 
                         && c.extraLevel == 1).ToList());
-                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7 
+                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4 
                         && c.extraLevel == 1).ToList());
                     }
                     if (i == 3)
                     {
-                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4 
+                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7
                         && c.extraLevel == 3).ToList());
-                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5 
+                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6
                         && c.extraLevel == 3).ToList());
-                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6 
+                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5
                         && c.extraLevel == 3).ToList());
-                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7 
+                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4
                         && c.extraLevel == 3).ToList());
                     }
                     else
                     {
-                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4).ToList());
-                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5).ToList());
-                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6).ToList());
-                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7).ToList());
+                        dryTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 7).ToList());
+                        wetTrails = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 6).ToList());
+                        dryAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 5).ToList());
+                        wetAttractions = SimplyTravelDAL.Converts.SiteConvert.ConvertSiteListToModel(listOfSites.Where(c => c.codeSiteKind == 4).ToList());
                     }
                     arrListKinds = new List<SiteModel>[9] {coffeeShops,tombs,dryTrails,
                 wetTrails,dryAttractions,restaurants,wetAttractions,natureReserves,museuns };
                 }
+                foreach (var v in arrListKinds)
+                    if (v.Count() < 2)
+                        return null;
                 misLeft = misHours[halfDay_allDay];
-                dictOfTrips[i] = new List<SiteModel>();
-                dictOfTrips[i] = SitesRandom(misLeft, numOfSitesOfType, arrListKinds,myAddress);
+                listToRe[i] = new List<string>();
+                ListToCheck = SitesRandom(misLeft, numOfSitesOfType, arrListKinds, myAddress).Select(site => site.NameSite).ToList();
+                ListToCheck.Remove(ListToCheck[0]);
+                listToRe[i] = ListToCheck;
             }
-            return dictOfTrips;
+            return listToRe;
 
         }
         public List<SiteModel> SitesRandom(double misHours,double[]arrNumOfSitesToType,
@@ -163,7 +180,7 @@ namespace SimpltyTravelBLL
                 for (int i = 0; i < arrNumOfSitesToType.Length; i++)
                 {
 
-                    if (arrNumOfSitesToType[i] > 0)
+                    while (arrNumOfSitesToType[i] > 0)
                         {
                        for(int k=0;k<numForRand;k++)
                         {
@@ -273,12 +290,12 @@ namespace SimpltyTravelBLL
                 else
                     location += locationAsArray[i];
             }
-            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCKs4oBHYDXVTUCm-mHhbu7CERTQgbEM2Y&query=" + location + "&mode=driving&units=imperial&sensor=true";
+            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyCjD6qNrR7gLWz3YZp7cvAv-pOfnb30z_Q&query=" + location + "&mode=driving&units=imperial&sensor=true";
         }
 
         static string BuildUrlForDistance(string place1, string place2)
         {
-            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCKs4oBHYDXVTUCm-mHhbu7CERTQgbEM2Y&units=imperial&origins=";
+            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCjD6qNrR7gLWz3YZp7cvAv-pOfnb30z_Q&units=imperial&origins=";
             return url + "place_id:" + place1 + "&destinations=place_id:" + place2;
         }
         #endregion

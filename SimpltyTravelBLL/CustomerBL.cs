@@ -30,9 +30,14 @@ namespace SimpltyTravelBLL
         {
             SiteInTripBL site = new SiteInTripBL();
             var list = this.GetTripsPerCustomer(id).OrderByDescending(c => c.DateTrip);
+            List<SiteInTripModel> listToAdd = new List<SiteInTripModel>();
             List<SiteInTripModel> returListn = new List<SiteInTripModel>();
             foreach (var v in list)
-                returListn.Add(site.GetSitesInTripByCodeTrip(v.CodeTrip));
+            {
+                listToAdd = site.GetSitesInTripByCodeTrip(v.CodeTrip);
+                foreach (var a in listToAdd)
+                    returListn.Add(a);
+            }
             return returListn;
         }
         //get a customer by id
@@ -127,24 +132,29 @@ namespace SimpltyTravelBLL
                 Random rand = new Random();
                 int newPassword = rand.Next(111111, 999999);
                 SimpltyTravelBLL.CustomerBL bl = new SimpltyTravelBLL.CustomerBL();
+            c = GetCustomerById(c.IdCustomer);
+            if (c == null)
+                return -1;
                 bl.ConfirmPassword(c.IdCustomer, newPassword.ToString());
-                SendMail sendMail = new SendMail("SimplyTravel","Ester0556708556@gmail.com","");
+                SendMail sendMail = new SendMail("SimplyTravel", "SimplyTravelSite@gmail.com", "Simply207");
             string body = "";
-            string subject = string.Format(" אימות סיסמא למשתמש {0}" , c.NameCustomer) ;
+            string subject = string.Format("אימות סיסמא למשתמש {0}" , c.NameCustomer) ;
             body += "\nלתשומת לבך, מצורפת סיסמתך החדשה לכניסה למערכת";
             body += string.Format(" :סיסמתך החדשה היא {0}", newPassword);
             //מבצע את השליחה
             bool mailSend = true;
+            
             mailSend = sendMail.SendEMail(new MessageGmail()
             {
-                sendTo = c.Email,
+                sendTo = GetDbSet<Customers>().FirstOrDefault(s=>s.idCustomer==c.IdCustomer).email ,
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true
             });
 
-            return 0;
+            return c.IdCustomer;
         }
+
     }
 
 }

@@ -15,21 +15,27 @@ namespace SimpltyTravelBLL
         {
         }
         //get a response by IdCustomer and code site
-        private bool GetResponseByCodeToSiteToSpecifiecCustomer(int code,int id)
+        public bool GetResponseByCodeToSiteToSpecifiecCustomer(int code,int id,List<SiteInTripModel>siteInTrip)
         {
             CustomerBL c = new CustomerBL();
-            List<SiteInTripModel> siteInTrip = c.GetSitesPerCustomer(id);
-            SiteInTripModel site = siteInTrip.First(s => s.CodeSite == code);
-            if (site==null)
-                return false;
-            if(GetResponseByCode(site.CodeSite.Value).Question4==0)
+           List< SiteInTripModel> site = siteInTrip.Where(s => s.CodeSite == id).ToList();
+            if(site.Count==0)
+                return true;
+            var response = GetResponseByCode(site[0].CodeSite.Value);
+            if (response==null)
+                return true;
+            if(response.Question4 == 0)
             return false;
             return true;
         }
         //get a response by CodeSiteInTrip
         private ResponseModel GetResponseByCode(int code)
         {
-            return SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToModel(GetDbSet<Responses>().First(c => c.codeSiteInTrip == code));
+            List<ResponseModel> responses = SimplyTravelDAL.Converts.ResponseConvert.ConvertRespnseListToModel(GetDbSet<Responses>().Where(c => c.codeSiteInTrip == code));
+            if (responses.Count == 0)
+                return null;
+            return responses[0];
+              
         }
         //add a response
         public int AddResponse(int code,int q1,int q2,int q3,int q4,string note)

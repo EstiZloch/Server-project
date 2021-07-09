@@ -27,7 +27,7 @@ namespace Models
             {
                 SenderName = senderName;
                 SenderEmailId = emailId;
-                Password = "password";
+                Password = password;
                 FromAddress = new MailAddress(SenderEmailId, SenderName);
             }
             //פונקציה השולחת מייל
@@ -71,7 +71,7 @@ namespace Models
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
                 client.Credentials = new System.Net.NetworkCredential
-                     ("ester0556708556@gmail.com", "esti207426974");
+                     ("SimplyTravelSite@gmail.com", "Simply207");
                 return client;
             }
 

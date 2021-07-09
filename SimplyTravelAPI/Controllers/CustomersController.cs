@@ -23,7 +23,14 @@ namespace SimplyTravelGui.Controllers
     {
              return customerBL.SignIn(id,password);
     }
-        
+        [AcceptVerbs("GET", "POST")]
+        [Route("getDetails/{id}")]
+        [HttpGet]
+        //access to the user's account.
+        public CustomerModel getDetails(int id)
+        {
+            return customerBL.GetCustomerById(id);
+        }
         [AcceptVerbs("GET", "POST")]
         [Route("signUp")]
         [HttpPost]
@@ -40,8 +47,14 @@ namespace SimplyTravelGui.Controllers
         [HttpPost]
         public int ConfirmPassword(CustomerModel c)
         {
-            customerBL.SendEmail(c);
-            return c.IdCustomer;
+           return customerBL.SendEmail(c);
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("UpdatePassword")]
+        [HttpPost]
+        public void UpdatePassword(CustomerModel c)
+        {
+             customerBL.ConfirmPassword(c.IdCustomer,c.PasswordCustomer);
         }
     }
 }

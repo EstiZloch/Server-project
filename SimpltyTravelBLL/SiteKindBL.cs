@@ -7,7 +7,7 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class SiteKindBL:SimplyTravelBL
+  public  class SiteKindBL:SimplyTravelBL
     {
      
         public SiteKindBL()

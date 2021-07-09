@@ -67,11 +67,51 @@ namespace SimplyTravelGui.Controllers
             return siteBl.GetAllSites();
         }
         [AcceptVerbs("GET", "POST")]
-        [Route("plan/{code}/{min}/{max}/{add}/{half}/{car}")]
+        [Route("plan/{code}/{min}/{max}/{add}/{half}/{car}/{idcus}")]
         [HttpGet]
-        public Dictionary<int,List<SiteModel>> Plan(int code,int min,int max,string add,bool half,bool car)
+        public List<string>[] Plan(int code,int min,int max,string add,bool half,bool car,int idcus)
         {
-          return  a.CreateTravels(min, max, car, half, code, add);
+          return  a.CreateTravels(min, max, car, half, code, add,idcus);
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("getSiteDetails/{name}")]
+        [HttpGet]
+
+        public List<SiteToDisplay> getSiteDetails([FromUri] string[] name)
+        {
+            SiteKindBL skBl = new SiteKindBL();
+            SubRegionBL subBl = new SubRegionBL();
+            RegionBL rBl = new RegionBL();
+            string [] arr = name[0].Split(',');
+            List<SiteModel> sites=new List<SiteModel> ();
+            List<SiteToDisplay> sitesToResults=new List<SiteToDisplay> ();
+            Sub_RegionModel s = new Sub_RegionModel();
+            foreach (var n in arr)
+                sites.Add(siteBl.GetSiteByName(n));
+            for (int i = 0; i < sites.Count; i++)
+            {
+                if (sites[i] != null)
+                    s = subBl.GetSubRegionByCode((int)sites[i].CodeSub_Region);
+                if (sites[i] != null)
+                    sitesToResults.Add(new SiteToDisplay()
+                {
+                    CodeSite = sites[i].CodeSite,
+                    NameSiteKind = skBl.GetSiteKindByCode((int)sites[i].CodeSiteKind).NameSiteKind,
+                    NameSite = sites[i].NameSite,
+                    Adress = sites[i].Adress,
+                    NameSub_Region = s.nameSub_Region,
+                    NameRegion = rBl.GetRegionById((int)s.CodeRegion).NameRegion,
+                    ExtraLevel = (int)sites[i].ExtraLevel,
+                    MinAge = (int)sites[i].MinAge,
+                    MaxAge = (int)sites[i].MaxAge,
+                    MisLiterWater = (int)sites[i].MisLiterWater,
+                    TimeSpend = (int)sites[i].TimeSpend,
+                    StatusSite = sites[i].StatusSite == "true" ? "פעיל" : "לא פעיל",
+                    Car_bus = (bool)sites[i].Car_bus ? "תחבורה ציבורית" : "הגעה עצמית",
+                    Free_notFree = (bool)sites[i].Free_notFree ? "חינם" : "לא בחינם"
+                });
+            }
+            return sitesToResults;
         }
     }
 }

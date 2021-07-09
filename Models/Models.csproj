@@ -58,6 +58,7 @@
     <Compile Include="ResponseModel.cs" />
     <Compile Include="SendMail.cs" />
     <Compile Include="SiteInTripModel.cs" />
+    <Compile Include="SiteInTripToAdd.cs" />
     <Compile Include="SiteKindModel.cs" />
     <Compile Include="SiteModel.cs" />
     <Compile Include="SiteToDisplay.cs" />
