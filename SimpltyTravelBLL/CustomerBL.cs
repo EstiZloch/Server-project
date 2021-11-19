@@ -108,13 +108,14 @@ namespace SimpltyTravelBLL
                 return SimplyTravelBL.Result.Found;
             return SimplyTravelBL.Result.IncorrrectDetails;
         }
-        private SimplyTravelBL.Result UpdateCustomer(CustomerModel c)
+        public int UpdateCustomer(CustomerModel c)
         {
             if (GetCustomerById(c.IdCustomer) == null)
-                return SimplyTravelBL.Result.NotFound;
+                return 0;
             //------------validation 
             UpdateDB<Customers>(SimplyTravelDAL.Converts.CustomerConvert.ConvertCustomerToEF(c));
-            return SimplyTravelBL.Result.Found;
+            return 1;
+
         }
         public void ConfirmPassword(int id, string password)
         {
@@ -153,6 +154,18 @@ namespace SimpltyTravelBLL
             });
 
             return c.IdCustomer;
+        }
+        public int CheckPassword(CustomerModel c)
+        {
+            CustomerModel customer = GetCustomerById(c.IdCustomer);
+            if (customer == null)
+                return -1;
+            if (c.NameCustomer != customer.PasswordCustomer)
+                return -1;
+            customer.PasswordCustomer = c.PasswordCustomer;
+            customer.CheckPassword = c.PasswordCustomer;
+            UpdateCustomer(customer);
+            return customer.IdCustomer;
         }
 
     }

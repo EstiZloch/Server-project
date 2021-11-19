@@ -7,7 +7,7 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class ResponseBL:SimplyTravelBL
+   public class ResponseBL:SimplyTravelBL
     {
    
         
@@ -34,25 +34,41 @@ namespace SimpltyTravelBLL
             List<ResponseModel> responses = SimplyTravelDAL.Converts.ResponseConvert.ConvertRespnseListToModel(GetDbSet<Responses>().Where(c => c.codeSiteInTrip == code));
             if (responses.Count == 0)
                 return null;
-            return responses[0];
-              
+            return responses[0];   
+        }
+        //get responses by code and id
+        public List<ResponseModel> GetResponsesByCodeAndId(int code,int id)
+        {
+            SiteInTripBL bl = new SiteInTripBL();
+            List<SiteInTripModel> sitesInTrip = bl.GetSitesInTripByCodeTrip(code);
+            List<ResponseModel> responses = new List<ResponseModel>();
+            ResponseModel r;
+            foreach (var v in sitesInTrip)
+            {
+                r = GetResponseByCode(v.CodeSiteInTrip);
+                if (r != null)
+                    responses.Add(r);
+                else
+                {
+                    r = new ResponseModel() { CodeSiteInTrip = v.CodeSiteInTrip, Question1 = 0, Question2 = 0, Question3 = 0, Question4 = 1, Question5 = 0, Notes = "הכנס הערה" };
+                    AddResponse(r);
+                    responses.Add(r);
+                }
+            }
+            return responses;
         }
         //add a response
-        public int AddResponse(int code,int q1,int q2,int q3,int q4,string note)
+        public int AddResponse(ResponseModel response)
         {
             //check if response exist in DB
-            if (GetResponseByCode(code) != null)
+            if (GetResponseByCode(response.CodeResponse) != null)
             {
                 //if exist
                 return 0;
             }
-            //if (!Validation.LegalId(id) || !Validation.IsPassword(id, password))
-            //    return SimplyTravelBL.Result.IncorrrectDetails;
-            //------------validation 
-            ResponseModel r = new ResponseModel() { CodeResponse = 1, CodeSiteInTrip = code, Question1 = q1, Question2 = q2, Question3 = q3, Question4 = q4, Notes = note };
             //add new response to the responses list
-            AddToDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(r));
-            return r.CodeResponse;
+            AddToDB<Responses>(SimplyTravelDAL.Converts.ResponseConvert.ConvertResponseToEF(response));
+            return 1;
         }
         //delete a response
         private int DeleteResponse(int code)
@@ -64,7 +80,7 @@ namespace SimpltyTravelBLL
             return 1;
         }
         //update a response
-        private int UpdateResponse(ResponseModel r)
+        public int UpdateResponse(ResponseModel r)
         {
             if (GetResponseByCode(r.CodeSiteInTrip.Value) == null)
                 return 0;

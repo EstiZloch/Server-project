@@ -13,6 +13,14 @@ namespace SimpltyTravelBLL
         public TripBL()
         {
         }
+        //get trips to a customer
+        public List<TripModel> GetAllTripsToCustomer(int id)
+        {
+            List<TripModel> trips = SimplyTravelDAL.Converts.TripConvert.ConvertTripListToModel(GetDbSet<Trips>());
+            if (trips != null)
+                return trips.Where(c => c.IdCustomer == id).ToList();
+            return null;
+        }
         //get a trip by id and date
         private TripModel GetTripByIdAndDate(int id,DateTime date)
         {

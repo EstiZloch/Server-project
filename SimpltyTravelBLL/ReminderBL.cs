@@ -7,55 +7,69 @@ using SimplyTravelDAL;
 using Models;
 namespace SimpltyTravelBLL
 {
-    class ReminderBL:SimplyTravelBL
+   public class ReminderBL:SimplyTravelBL
     {
-        
+       static int id;
         public ReminderBL()
         {
            
         }
-        //get reminder by id
-        private ReminderModel GetReminderById(int id)
+        //get reminders by id
+        public List<ReminderModel> GetRemindersById(int id)
         {
-            return SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToModel(GetDbSet<Remainders>().First(c => c.idCustomer == id));
+            ReminderBL.id = id;
+            List<ReminderModel>r= SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderListToModel(GetDbSet<Remainders>().Where(c => c.idCustomer == id));
+            r = r.OrderBy(f => DateTime.Parse(f.Describe.Split('*')[1])).ToList();
+            return r;
         }
+
         //sign up function
-        public int AddReminder(int id,string des)
+        public int AddReminder(ReminderModel r)
         {
-            //check if reminder exist in DB
-            if (GetReminderById(id) != null)
+            AddToDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(r));
+            return r.CodeRemainder;
+        }
+
+        public int checkUpdate(ReminderDisplay[] arr)
+        {
+            ReminderModel model, toUpdate,toAdd,toDelete;
+            List<ReminderModel> r = GetRemindersById(ReminderBL.id);
+            foreach(var v in arr)
             {
-                //if exist
-                return 0;
+                List<int> check = r.Select(f => f.CodeRemainder).ToList();
+                if(check.Contains(v.CodeRemainder))
+                {
+
+                    model = r.FirstOrDefault(f => f.CodeRemainder == v.CodeRemainder);
+                    toUpdate = new ReminderModel() { CodeRemainder = model.CodeRemainder, Describe = v.Describe + "*" + v.Date, IdCustomer = model.IdCustomer };
+                    UpdateReminder(toUpdate);
+                }
+                else
+                {
+                    toAdd = new ReminderModel() { CodeRemainder = v.CodeRemainder, Describe = v.Describe + "*" + v.Date, IdCustomer = id };
+                    AddReminder(toAdd);
+                }
             }
-            ReminderModel c = new ReminderModel() { IdCustomer = id, Describe = des, CodeRemainder=1 };
-            if (GetDbSet<Remainders>().ToList().Count > 0)
-                c.CodeRemainder = GetDbSet<Remainders>().ToList().Last().codeRemainder + 1;
-            //add new custemer to the customers list
-            AddToDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(c));
-            return c.CodeRemainder;
-            //load the page with his details
-        }
-        //delete a reminder
-        private int DeleteReminder(int id)
-        {
-            ReminderModel r = GetReminderById(id);
-            if (r == null)
-                return 1;
-            DeleteDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(r));
-            return 0;
-        }
-        private int UpdateReminder(ReminderModel c)
-        {
-            int i=0;
-            int? j=c.IdCustomer;
-            if (j.HasValue)
-                i = (int)j;
-            if (GetReminderById(i) == null)
-                return 0;
-            //------------validation 
-            UpdateDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(c));
+            foreach (var v in r)
+            {
+                List<int> check = arr.Select(f => f.CodeRemainder).ToList();
+                if (!check.Contains(v.CodeRemainder))
+                {
+                    toDelete = new ReminderModel() { CodeRemainder = v.CodeRemainder, Describe = v.Describe, IdCustomer = v.IdCustomer };
+                    DeleteReminder(toDelete);
+                }
+            }
             return 1;
+        }
+
+            //delete a reminder
+        private void DeleteReminder(ReminderModel r)
+            {
+            DeleteDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(r));
+            }
+            private void UpdateReminder(ReminderModel c)
+        {
+            UpdateDB<Remainders>(SimplyTravelDAL.Converts.ReminderConvert.ConvertReminderToEF(c));
         }
 
     }

@@ -29,7 +29,8 @@ namespace SimplyTravelGui.Controllers
         //access to the user's account.
         public CustomerModel getDetails(int id)
         {
-            return customerBL.GetCustomerById(id);
+            CustomerModel c= customerBL.GetCustomerById(id);
+            return c;
         }
         [AcceptVerbs("GET", "POST")]
         [Route("signUp")]
@@ -55,6 +56,20 @@ namespace SimplyTravelGui.Controllers
         public void UpdatePassword(CustomerModel c)
         {
              customerBL.ConfirmPassword(c.IdCustomer,c.PasswordCustomer);
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("update")]
+        [HttpPost]
+        public int Update(CustomerModel c)
+        {
+            return customerBL.UpdateCustomer(c);
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("check")]
+        [HttpPost]
+        public int check(CustomerModel c)
+        {
+            return customerBL.CheckPassword(c);
         }
     }
 }

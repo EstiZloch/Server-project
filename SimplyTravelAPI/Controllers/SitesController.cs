@@ -28,6 +28,13 @@ namespace SimplyTravelGui.Controllers
             return siteBl.AddSite(s);
         }
         [AcceptVerbs("GET", "POST")]
+        [Route("update")]
+        [HttpPost]
+        public int Update(SiteModel s)
+        {
+            return siteBl.UpdateSite(s);
+        }
+        [AcceptVerbs("GET", "POST")]
         [Route("getMin/{code}")]
         [HttpGet]
         //access to the user's account.
@@ -112,6 +119,21 @@ namespace SimplyTravelGui.Controllers
                 });
             }
             return sitesToResults;
+        }
+        [AcceptVerbs("GET", "POST")]
+        [Route("getSiteDetailsByCode/{code}")]
+        [HttpGet]
+        public SiteModel getSiteDetailsByCode(int code)
+        {
+            return siteBl.GetSiteByCode(code);
+
+            }
+        [AcceptVerbs("GET", "POST")]
+        [Route("changeStatus")]
+        [HttpPost]
+        public void changeStatus(SiteToDisplay site)
+        {
+             siteBl.ChangeStatusSite(site.CodeSite);
         }
     }
 }

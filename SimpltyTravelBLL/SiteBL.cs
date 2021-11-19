@@ -42,7 +42,7 @@ namespace SimpltyTravelBLL
             return (int)avg;
         }
         //get site by code
-        private SiteModel GetSiteByCode(int code)
+        public SiteModel GetSiteByCode(int code)
         {
             return SimplyTravelDAL.Converts.SiteConvert.ConvertSiteToModel(GetDbSet<Sites>().First(c => c.codeSite == code));
         }
@@ -136,13 +136,14 @@ namespace SimpltyTravelBLL
         }
 
         //change status to a site
-        public string ChangeStatusSite(int code, string status)
+        public void ChangeStatusSite(int code)
         {
             var site = this.GetSiteByCode(code);
-            string statusRet = site.StatusSite;
-            site.StatusSite = status;
+            if (site.StatusSite == "true")
+                site.StatusSite = "False";
+            else
+                site.StatusSite = "true";
             UpdateDB<Sites>(SimplyTravelDAL.Converts.SiteConvert.ConvertSiteToEF(site));
-            return statusRet;
         }
         //delete a site
         private int DeleteSite(int code)
@@ -153,7 +154,7 @@ namespace SimpltyTravelBLL
             DeleteDB<Sites>(SimplyTravelDAL.Converts.SiteConvert.ConvertSiteToEF(site));
             return 1;
         }
-        private int UpdateSite(SiteModel c)
+        public int UpdateSite(SiteModel c)
         {
             if (GetSiteByCode(c.CodeSite) == null)
                 return 0;

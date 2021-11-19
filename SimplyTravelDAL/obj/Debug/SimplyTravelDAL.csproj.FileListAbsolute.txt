@@ -58,3 +58,15 @@ C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelD
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.csproj.CopyComplete
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.dll
 C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\obj\Debug\SimplyTravelDAL.pdb
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\Microsoft.AspNetCore.Http.Features.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Memory.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Numerics.Vectors.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Buffers.dll
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\Microsoft.AspNetCore.Http.Features.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Memory.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Numerics.Vectors.xml
+C:\development\SimplyTravel\SimplyTravel\SimplyTravelDAL\bin\Debug\System.Buffers.xml

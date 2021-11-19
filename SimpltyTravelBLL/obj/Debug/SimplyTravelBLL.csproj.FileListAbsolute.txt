@@ -41,3 +41,15 @@ C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\obj\Debug\SimpltyTrave
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.dll
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.pdb
 C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Newtonsoft.Json.Bson.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Microsoft.AspNetCore.Http.Features.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Memory.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Numerics.Vectors.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Buffers.dll
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Microsoft.AspNetCore.Http.Features.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Memory.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Numerics.Vectors.xml
+C:\development\SimplyTravel\SimplyTravel\SimpltyTravelBLL\bin\Debug\System.Buffers.xml
