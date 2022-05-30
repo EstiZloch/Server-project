@@ -290,12 +290,12 @@ namespace SimpltyTravelBLL
                 else
                     location += locationAsArray[i];
             }
-            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyA6tcskWYqO7vAc_OFvyAiOAmvfTsdtrww&query=" + location + "&mode=driving&units=imperial&sensor=true";
+            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=<Enter You Key>&query=" + location + "&mode=driving&units=imperial&sensor=true";
         }
 
         static string BuildUrlForDistance(string place1, string place2)
         {
-            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyA6tcskWYqO7vAc_OFvyAiOAmvfTsdtrww&units=imperial&origins=";
+            string url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=<Enter You Key>&units=imperial&origins=";
             return url + "place_id:" + place1 + "&destinations=place_id:" + place2;
         }
         #endregion
